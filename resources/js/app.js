@@ -41,6 +41,12 @@ import Home from './components/Home'
 import UsersIndex from './components/UsersIndex'
 import UserCreate from './components/UserCreate'
 import UserEdit from './components/UserEdit'
+import RolesIndex from './components/RolesIndex'
+import RoleCreate from './components/RoleCreate'
+import RoleEdit from './components/RoleEdit'
+import CustomersIndex from './components/CustomersIndex'
+import CustomerCreate from './components/CustomerCreate'
+import CustomerEdit from './components/CustomerEdit'
 
 import WishlistIndex from './components/WishlistIndex'
 import WishlistCreate from './components/WishlistCreate'
@@ -91,6 +97,37 @@ const router = new VueRouter({
             name: 'wishlist.edit',
             component: WishlistEdit,
         },
+        {
+            path: '/roles',
+            name: 'roles.index',
+            component: RolesIndex,
+        },
+        {
+            path: '/roles/create',
+            name: 'roles.create',
+            component: RoleCreate,
+        },
+        {
+            path: '/roles/:id/edit',
+            name: 'roles.edit',
+            component: RoleEdit,
+        },
+        {
+            path: '/customers',
+            name: 'customers.index',
+            component: CustomersIndex,
+        },
+        {
+            path: '/customers/create',
+            name: 'customers.create',
+            component: CustomerCreate,
+        },
+        {
+            path: '/customers/:id/edit',
+            name: 'customers.edit',
+            component: CustomerEdit,
+        },
+
     ],
 });
 

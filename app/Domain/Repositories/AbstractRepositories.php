@@ -9,6 +9,7 @@ use Illuminate\Database\Query\Builder as BuilderAlias;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Class AbstractRepository
  *

@@ -1,21 +1,29 @@
 <?php
+
+
 namespace App\Domain\Repositories;
+
+
+use App\Domain\Contracts\CustomerInterface;
 use App\Domain\Contracts\UserInterface;
-use App\Domain\Entities\User;
+use App\Domain\Entities\Customer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Response;
+
 /**
- * Class UserRepository
+ * Class CustomerRepository
  * @package App\Domain\Repositories
  */
-final class UserRepository extends AbstractRepository implements UserInterface
+final class CustomerRepository extends AbstractRepository implements CustomerInterface
 {
     protected $model;
-    public function __construct(User $user)
+
+    public function __construct(Customer $customer)
     {
-        $this->model = $user;
+        $this->model = $customer;
     }
+
     /**
      * @param int $limit
      * @param array $columns
@@ -27,6 +35,7 @@ final class UserRepository extends AbstractRepository implements UserInterface
     {
         return parent::paginate($limit, $columns, $key, $value);
     }
+
     /**
      * @param array $data
      * @return mixed|Response
@@ -34,11 +43,17 @@ final class UserRepository extends AbstractRepository implements UserInterface
     public function store(array $data)
     {
         return parent::create([
-            'name'     => e($data['name']),
-            'email'    => e($data['email']),
-            'password' => e($data['password']),
+            'first_name'    => e($data['first_name']),
+            'last_name'     => e($data['last_name']),
+            'gender'        => e($data['gender']),
+            'date_of_birth' => e($data['date_of_birth']),
+            'email'         => e($data['email']),
+            'password'      => bcrypt($data['password']),
+            'notes'         => e($data['notes']),
+            'phone'         => e($data['phone']),
         ]);
     }
+
     /**
      * @param $id
      * @param array $data
@@ -48,6 +63,7 @@ final class UserRepository extends AbstractRepository implements UserInterface
     {
         return parent::update($id, $data);
     }
+
     /**
      * @param int $id
      * @param array $columns
@@ -57,6 +73,7 @@ final class UserRepository extends AbstractRepository implements UserInterface
     {
         return parent::find($id, $columns);
     }
+
     /**
      * @param $id
      * @return mixed|Response
@@ -66,4 +83,5 @@ final class UserRepository extends AbstractRepository implements UserInterface
     {
         return parent::delete($id);
     }
+
 }

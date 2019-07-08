@@ -1,21 +1,28 @@
 <?php
+
+
 namespace App\Domain\Repositories;
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Entities\User;
+
+
+use App\Domain\Contracts\RoleInterface;
+use App\Domain\Entities\Role;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Class UserRepository
  * @package App\Domain\Repositories
  */
-final class UserRepository extends AbstractRepository implements UserInterface
+final class RoleRepository extends AbstractRepository implements RoleInterface
 {
     protected $model;
-    public function __construct(User $user)
+
+    public function __construct(Role $role)
     {
-        $this->model = $user;
+        $this->model = $role;
     }
+
     /**
      * @param int $limit
      * @param array $columns
@@ -27,6 +34,7 @@ final class UserRepository extends AbstractRepository implements UserInterface
     {
         return parent::paginate($limit, $columns, $key, $value);
     }
+
     /**
      * @param array $data
      * @return mixed|Response
@@ -34,11 +42,11 @@ final class UserRepository extends AbstractRepository implements UserInterface
     public function store(array $data)
     {
         return parent::create([
-            'name'     => e($data['name']),
-            'email'    => e($data['email']),
-            'password' => e($data['password']),
+            'name'                  => e($data['name']),
+            'permission_type'       => e($data['permission_type']),
         ]);
     }
+
     /**
      * @param $id
      * @param array $data
@@ -48,6 +56,7 @@ final class UserRepository extends AbstractRepository implements UserInterface
     {
         return parent::update($id, $data);
     }
+
     /**
      * @param int $id
      * @param array $columns
@@ -57,6 +66,7 @@ final class UserRepository extends AbstractRepository implements UserInterface
     {
         return parent::find($id, $columns);
     }
+
     /**
      * @param $id
      * @return mixed|Response
@@ -66,4 +76,5 @@ final class UserRepository extends AbstractRepository implements UserInterface
     {
         return parent::delete($id);
     }
+
 }
