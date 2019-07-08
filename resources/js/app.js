@@ -42,6 +42,9 @@ import UsersIndex from './components/UsersIndex'
 import UserCreate from './components/UserCreate'
 import UserEdit from './components/UserEdit'
 
+import WishlistIndex from './components/WishlistIndex'
+import WishlistCreate from './components/WishlistCreate'
+import WishlistEdit from './components/WishlistEdit'
 const router = new VueRouter({
     mode: 'history',
     routes: [
@@ -69,6 +72,24 @@ const router = new VueRouter({
             path: '/users/:id/edit',
             name: 'users.edit',
             component: UserEdit,
+        },
+
+
+
+        {
+            path: '/wishlist',
+            name: 'wishlist.index',
+            component: WishlistIndex,
+        },
+        {
+            path: '/wishlist/create',
+            name: 'wishlist.create',
+            component: WishlistCreate,
+        },
+        {
+            path: '/wishlist/:id/edit',
+            name: 'wishlist.edit',
+            component: WishlistEdit,
         },
     ],
 });
