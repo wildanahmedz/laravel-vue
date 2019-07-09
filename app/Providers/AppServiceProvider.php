@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
         $this->registerUser();
         $this->registerCustomer();
         $this->registerRole();
+        $this->registerWishlist();
     }
 
     /**
@@ -43,5 +44,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->when('App\Http\Controllers\Api\RoleController')
             ->needs('App\Domain\Contracts\RoleInterface')
             ->give('App\Domain\Repositories\RoleRepository');
+    }
+    public function registerWishlist(){
+        $this->app->when('App\Http\Controllers\Api\WishlistController')
+            ->needs('App\Domain\Contracts\WishlistInterface')
+            ->give('App\Domain\Repositories\WishlistRepository');
     }
 }

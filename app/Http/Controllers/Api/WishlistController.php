@@ -2,42 +2,72 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Domain\Contracts\WishlistInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\WishlistCreateRequest;
 use App\Http\Requests\WishlistEditRequest;
-use App\Wishlist;
+use App\Domain\Entities\Wishlist;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers\Api
+ */
 class WishlistController extends Controller
 {
-    public function index(){
-        return Wishlist::paginate();
+    /**
+     * @var WishlistInterface
+     */
+    protected $wishlist;
+
+    /**
+     * UserController constructor.
+     * @param UserInterface $user
+     */
+    public function __construct(WishlistInterface $wishlist)
+    {
+        $this->wishlist = $wishlist;
     }
 
-    public function store(UserCreateRequest $request){
-        return User::create($request->all());
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function index(Request $request){
+        return $this->wishlist->paginate(10,  $columns = ['*'], 'item_options' ,''  );
     }
 
+    /**
+     * @param UserCreateRequest $request
+     * @return mixed
+     */
+    public function store(WishlistCreateRequest $request){
+        return $this->wishlist->store($request->all());
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function show($id){
-        return User::find($id);
+        return $this->wishlist->find($id);
     }
 
-    public function update(UserEditRequest $request, $id){
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->save();
-
-        return $user;
+    /**
+     * @param UserEditRequest $request
+     * @param $id
+     * @return mixed
+     */
+    public function update(WishlistEditRequest $request, $id){
+       return $this->wishlist->update($id, $request->all());
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id){
-        $user = User::find($id);
-        $result = $user->delete();
-        if($result){
-            return response()->json(['message' =>'Data deleted!'], 200);
-        }
-
-        return response()->json(['message' =>'something wrong'], 500);
+        return $this->wishlist->delete($id);
     }
 }

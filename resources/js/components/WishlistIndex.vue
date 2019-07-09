@@ -1,5 +1,5 @@
 <template>
-  <div class="wishlists">
+  <div class="wishlist">
     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
       <router-link class="btn btn-secondary" :to="{ name: 'wishlist.create' }">Create</router-link>
     </div>
@@ -7,32 +7,32 @@
       <p>{{ error }}</p>
     </div>
 
-    <div v-if="wishlist">
+    <div v-if="wishlists">
       <table class="table table-striped table-hover">
         <thead class="thead-light">
           <tr>
-            <th scope="col">Item_Option</th>
+            <th scope="col">Item Option</th>
             <th scope="col">Shared</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="{ item_option, shared} in wishlist">
-            <td>{{name}}</td>
-            <td>{{email}}</td>
+          <tr v-for="{ id, item_options, shared} in wishlists">
+            <td>{{item_options}}</td>
+            <td>{{shared}}</td>
             <td>
               <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                   <router-link
                     class="btn btn-secondary"
-                    :to="{ name: 'wishlit.edit', params: { id } }"
+                    :to="{ name: 'wishlist.edit', params: { id } }"
                   >Edit</router-link>
                   <button
                     type="button"
                     class="btn btn-danger"
                     data-toggle="modal"
                     data-target="#exampleModal"
-                    @click="showModal({item_option, shared})"
+                    @click="showModal({id, item_options, shared})"
                   >Delete</button>
                 </div>
               </div>
@@ -61,7 +61,7 @@
     </div>
     <modal
       v-show="isModalVisible"
-      :wishlist="selectedWishlist"
+      :data="selectedWishlist"
       @close="closeModal"
       :method="deleteWishlist"
     ></modal>

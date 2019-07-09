@@ -1,7 +1,6 @@
 <?php
 namespace App\Domain\Repositories;
 use App\Domain\Contracts\WishlistInterface;
-use App\Domain\Contracts\UserInterface;
 use App\Domain\Entities\Wishlist;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
@@ -36,9 +35,7 @@ final class WishlistRepository extends AbstractRepository implements WishlistInt
     {
         return parent::create([
             'item_options'  => e($data['item_options']),
-            'moved_to_cart' => e($data['moved_to_cart']),
             'shared'        => e($data['shared']),
-            'time_of_moving' => e($data['time_of_moving']),
         ]);
     }
     /**

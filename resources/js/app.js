@@ -83,17 +83,17 @@ const router = new VueRouter({
 
 
         {
-            path: '/wishlist',
+            path: '/wishlists',
             name: 'wishlist.index',
             component: WishlistIndex,
         },
         {
-            path: '/wishlist/create',
+            path: '/wishlists/create',
             name: 'wishlist.create',
             component: WishlistCreate,
         },
         {
-            path: '/wishlist/:id/edit',
+            path: '/wishlists/:id/edit',
             name: 'wishlist.edit',
             component: WishlistEdit,
         },

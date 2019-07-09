@@ -37,9 +37,4 @@ interface WishlistInterface
     public function delete($id);
 }
 
-    © 2019 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    H
+    
